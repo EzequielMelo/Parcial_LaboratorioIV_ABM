@@ -13,4 +13,9 @@ export class DatabaseService {
     const datos = this.firestore.collection('datos');
     return datos.valueChanges();
   }
+
+  addProducto(producto: any) {
+    const productosColl = this.firestore.collection('productos');
+    return productosColl.add(producto);
+  }
 }

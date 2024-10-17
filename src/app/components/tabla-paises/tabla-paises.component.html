@@ -1,0 +1,10 @@
+<ul class="list-group mb-3 list-scrollable">
+  @for (country of countries; track $index) {
+  <li (click)="seleccionarPais(country.name)" class="list-group-item d-flex justify-content-center lh-sm">
+    <div class="justify-content-center text-center">
+      <h6 class="my-0">{{country.name}}</h6>
+      <img class="align-middle" src="{{country.flag}}" alt="" style="height: 30px">
+    </div>
+  </li>
+  }
+</ul>
