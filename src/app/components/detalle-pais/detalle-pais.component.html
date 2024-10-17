@@ -1,0 +1,12 @@
+<div *ngIf="countryDetails">
+  <h2>{{ countryDetails?.name?.common }}</h2>
+  <p><strong>Capital:</strong> {{ countryDetails?.capital?.[0] }}</p>
+  <p><strong>Región:</strong> {{ countryDetails?.region }}</p>
+  <p><strong>Subregión:</strong> {{ countryDetails?.subregion }}</p>
+  <p><strong>Población:</strong> {{ countryDetails?.population | number }}</p>
+  <img [src]="countryDetails?.flags?.png" alt="Bandera de {{ countryDetails?.name?.common }}">
+</div>
+
+<div *ngIf="error">
+  <p>{{ error }}</p>
+</div>

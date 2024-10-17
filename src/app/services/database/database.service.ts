@@ -18,4 +18,9 @@ export class DatabaseService {
     const productosColl = this.firestore.collection('productos');
     return productosColl.add(producto);
   }
+
+  getproductos() {
+    const productos = this.firestore.collection('productos');
+    return productos.valueChanges();
+  }
 }

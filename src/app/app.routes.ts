@@ -27,4 +27,12 @@ export const routes: Routes = [
       ),
     canActivate: [authGuard],
   },
+  {
+    path: 'productos',
+    loadComponent: () =>
+      import('./pages/productos/productos.component').then(
+        (c) => c.ProductosComponent
+      ),
+    canActivate: [authGuard],
+  },
 ];

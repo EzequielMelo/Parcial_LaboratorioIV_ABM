@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +28,10 @@ export class ApiRequestService {
     });
 
     return petition;
+  }
+
+  getCountryByName(pais: string): Observable<any[]> {
+    const url = `${this.apiUrl}${pais}`;
+    return this.hhtp.get<any[]>(url); // Usamos any[] para la respuesta
   }
 }

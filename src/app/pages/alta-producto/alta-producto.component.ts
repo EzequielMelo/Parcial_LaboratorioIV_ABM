@@ -47,7 +47,7 @@ export class AltaProductoComponent {
         if (Array.isArray(data)) {
           this.countries = data
             .map((country: any) => ({
-              name: country.translations?.spa?.common || 'Nombre no disponible',
+              name: country.name.common || 'Nombre no disponible',
               flag: country.flags?.svg || 'URL no disponible',
             }))
             .sort((a, b) => a.name.localeCompare(b.name));
