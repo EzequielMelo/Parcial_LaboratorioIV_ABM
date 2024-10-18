@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, SimpleChanges } from '@angular/core';
 import { ApiRequestService } from '../../services/api-request/api-request.service';
 import { CommonModule } from '@angular/common';
 
@@ -10,16 +10,17 @@ import { CommonModule } from '@angular/common';
   styleUrl: './detalle-pais.component.css',
 })
 export class DetallePaisComponent {
-  @Input() pais: string | null = null;
+  @Input() pais: any | null = null;
   apiRequestService = inject(ApiRequestService);
   countryDetails: any = null;
   error: string | null = null;
 
-  ngOnInit() {
-    if (this.pais) {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['pais'] && this.pais) {
       this.apiRequestService.getCountryByName(this.pais).subscribe({
         next: (data) => {
           this.countryDetails = data[0];
+          console.log(this.countryDetails);
         },
         error: (err) => {
           console.error('Error al obtener el país:', err);

@@ -30,8 +30,10 @@ export class ApiRequestService {
     return petition;
   }
 
-  getCountryByName(pais: string): Observable<any[]> {
-    const url = `${this.apiUrl}${pais}`;
-    return this.hhtp.get<any[]>(url); // Usamos any[] para la respuesta
+  getCountryByName(pais: string) {
+    const apiUrl = `https://restcountries.com/v3.1/name/${pais}`;
+    return this.hhtp.get<any[]>(apiUrl, {
+      responseType: 'json',
+    });
   }
 }

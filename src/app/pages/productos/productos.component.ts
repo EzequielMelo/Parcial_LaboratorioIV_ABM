@@ -18,7 +18,7 @@ import { DetallePaisComponent } from '../../components/detalle-pais/detalle-pais
 })
 export class ProductosComponent {
   productos: any[] = [];
-  pais: string = '';
+  pais: any = '';
   producto: any | null = null;
   subscription: Subscription | undefined = undefined;
   private db = inject(DatabaseService);
@@ -32,6 +32,7 @@ export class ProductosComponent {
 
   recibirDetalleProducto($event: any) {
     this.producto = $event;
+    console.log(this.producto.paisOrigen);
     this.pais = this.producto.paisOrigen;
   }
 }
