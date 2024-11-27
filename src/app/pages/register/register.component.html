@@ -1,0 +1,69 @@
+<body>
+  <div id="login">
+    <h3 class="text-center text-white pt-5">Register form</h3>
+    <div class="container">
+      <div id="login-row" class="row justify-content-center align-items-center">
+        <div id="login-column" class="col-md-6">
+          <div id="login-box" class="col-md-12" style="height: fit-content;">
+            <form id="login-form" class="form" [formGroup]="registerForm">
+              <h3 class="text-center text-info">Register</h3>
+              <div class="form-group">
+                <label for="username" class="text-info">Nombre de usuario:</label><br>
+                <input formControlName="username" type="text" name="username" id="username" class="form-control">
+                <div class="h-[10px]">
+                  @if (registerForm.controls['username'].errors !== null && registerForm.controls['username'].touched) {
+                  @if (registerForm.controls['username'].errors!['required']) {
+                  <label class="font-light mt-1 text-xs text-red-700" for="username">Campo requerido</label>
+                  }
+                  @if (registerForm.controls['username'].errors!['minlength']) {
+                  <label class="font-light mt-1 text-xs text-red-700" for="username">Ingrese minimo 4 caracteres</label>
+                  }
+                  @if (registerForm.controls['username'].errors!['maxlength']) {
+                  <label class="font-light mt-1 text-xs text-red-700" for="username">El campo es demasiado largo</label>
+                  }
+                  }
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="username" class="text-info">email:</label><br>
+                <input formControlName="email" type="text" name="username" id="username" class="form-control">
+                <div class="h-[10px]">
+                  @if (registerForm.controls['email'].errors !== null && registerForm.controls['email'].touched) {
+                  @if (registerForm.controls['email'].errors!['required']) {
+                  <label class="font-light mt-1 text-xs text-red-700" for="email">Campo requerido</label>
+                  }
+                  @if (registerForm.controls['email'].errors!['email']) {
+                  <label class="font-light mt-1 text-xs text-red-700" for="email">Ingrese email valido</label>
+                  }
+                  }
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password" class="text-info">contraseña:</label><br>
+                <input formControlName="password" type="text" name="password" id="password" class="form-control">
+                <div class="h-[10px]">
+                  @if (registerForm.controls['password'].errors !== null && registerForm.controls['password'].touched) {
+                  @if (registerForm.controls['password'].errors!['required']) {
+                  <label class="font-light mt-1 text-xs text-red-700" for="password">Campo requerido</label>
+                  }
+                  @if (registerForm.controls['password'].errors!['minlength']) {
+                  <label class="font-light mt-1 text-xs text-red-700" for="password">Ingrese minimo 6 caracteres</label>
+                  }
+                  }
+                </div>
+              </div>
+              <div class="form-group">
+                <button (click)="register()" class="mt-3">Registrar</button>
+              </div>
+              <!-- 
+                <div id="register-link" class="text-right">
+                  <a href="#" class="text-info">Register here</a>
+                </div>
+              -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

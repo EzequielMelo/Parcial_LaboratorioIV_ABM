@@ -1,0 +1,23 @@
+<form id="login-form" class="form" [formGroup]="deleteContainerForm">
+  <div class="form-group">
+    <label for="codigo" class="text-info">codigo:</label><br>
+    <input formControlName="codigo" type="text" name="codigo" id="codigo" class="form-control">
+    <div class="h-[10px]">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="empresa" class="text-info">Empresa:</label><br>
+    <input formControlName="empresa" type="text" name="empresa" id="empresa" class="form-control">
+    <div class="h-[10px]">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="capacidad" class="text-info">Capacidad:</label><br>
+    <input formControlName="capacidad" type="text" name="capacidad" id="capacidad" class="form-control">
+    <div class="h-[10px]">
+    </div>
+  </div>
+  <div class="form-group mt-4">
+    <button (click)="deleteContainer()" type="button" class="w-100 btn btn-lg btn-outline-primary">Eliminar</button>
+  </div>
+</form>

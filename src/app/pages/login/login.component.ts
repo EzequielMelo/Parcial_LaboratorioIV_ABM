@@ -1,30 +1,69 @@
 import { Component, inject } from '@angular/core';
 import { AuthServiceService } from '../../services/auth-service/auth-service.service';
-import { FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  nombre: string = '';
-  contrasenia: string = '';
-  private auth = inject(AuthServiceService);
+  loginForm: FormGroup;
+  errorMessage = '';
+
+  private authService = inject(AuthServiceService);
+  private formBuilder = inject(FormBuilder);
+  private router = inject(Router);
+
+  constructor() {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
+
+  ngOnInit() {
+    this.authService.user$.subscribe((respuesta) => {
+      if (respuesta != null) {
+        this.router.navigateByUrl('');
+      }
+    });
+  }
 
   login() {
-    this.auth.loguear(this.nombre, this.contrasenia);
+    if (this.loginForm.valid) {
+      const { email, password } = this.loginForm.value;
+      this.authService.login(email, password).subscribe({
+        next: () => {
+          this.router.navigateByUrl('');
+        },
+        error: (errorMessage: string) => {
+          this.errorMessage = errorMessage;
+        },
+      });
+    }
   }
 
-  usuarioempleado() {
-    this.nombre = 'user';
-    this.contrasenia = '123456';
+  user() {
+    this.loginForm.patchValue({
+      email: 'usuario_1@hotmail.com',
+      password: '123456',
+    });
   }
 
-  usuarioAdmin() {
-    this.nombre = 'admin';
-    this.contrasenia = '123456';
+  admin() {
+    this.loginForm.patchValue({
+      email: 'eze@hotmail.com',
+      password: '123456',
+    });
   }
 }

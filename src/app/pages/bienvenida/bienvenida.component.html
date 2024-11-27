@@ -1,8 +1,10 @@
-<div class="flex justify-content-center">
-  <p>Esta es la pagina de bienvenida!!!</p>
-  <h2 class="">Datos de Github</h2>
-  <img src="{{receivedData.avatar_url}}" alt="">
-  <p class="">Nombre: {{ receivedData.name }}</p>
-  <p class="">Estudia: {{ receivedData.company }}</p>
-  <a class="" href={{receivedData.html_url}}>Github: {{receivedData.login}}</a>
+<div class="d-flex justify-content-center">
+  <div class="justify-content-center">
+    <p>Esta es la pagina de bienvenida!!!</p>
+    <h2 class="">Datos de Github</h2>
+    <img src="{{receivedData.avatar_url}}" alt="">
+    <p class="">Nombre: {{ receivedData.name }}</p>
+    <p class="">Estudia: {{ receivedData.company }}</p>
+    <a class="" href={{receivedData.html_url}}>Github: {{receivedData.login}}</a>
+  </div>
 </div>

@@ -3,14 +3,16 @@
     <thead>
       <tr style="position: sticky; top: 0; background-color: #343a40; z-index: 1;">
         <th scope="col">codigo</th>
-        <th scope="col">Descripcion</th>
+        <th scope="col">empresa</th>
+        <th scope="col">capacidad</th>
       </tr>
     </thead>
     <tbody>
-      @for (producto of productos; track $index) {
-      <tr (click)="mostrarDetalles(producto)" style="height: auto">
-        <th scope="row">{{producto.codigo}}</th>
-        <td>{{producto.descripcion}}</td>
+      @for (container of containers; track $index) {
+      <tr (click)="mostrarDetalles(container)" style="height: auto">
+        <th scope="row">{{container.codigo}}</th>
+        <td>{{container.empresa}}</td>
+        <td>{{container.capacidad}}</td>
       </tr>
       }
     </tbody>

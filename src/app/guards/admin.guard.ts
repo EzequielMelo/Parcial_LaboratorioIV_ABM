@@ -2,14 +2,14 @@ import { CanActivateFn, Router } from '@angular/router';
 import { AuthServiceService } from '../services/auth-service/auth-service.service';
 import { inject } from '@angular/core';
 
-export const authGuard: CanActivateFn = async (route, state) => {
+export const adminGuard: CanActivateFn = async (route, state) => {
   let auth = false;
 
   const authService = inject(AuthServiceService);
   const router = inject(Router);
 
-  authService.authUser$.subscribe((respuesta) => {
-    if (respuesta != null) {
+  authService.user$.subscribe((user) => {
+    if (user.userType === 'admin') {
       auth = true;
     } else {
       auth = false;

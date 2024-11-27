@@ -4,29 +4,49 @@
     <div class="container">
       <div id="login-row" class="row justify-content-center align-items-center">
         <div id="login-column" class="col-md-6">
-          <div id="login-box" class="col-md-12">
-            <form id="login-form" class="form" action="" method="post">
+          <div id="login-box" class="col-md-12" style="height: fit-content;">
+            <form id="login-form" class="form" [formGroup]="loginForm">
               <h3 class="text-center text-info">Login</h3>
               <div class="form-group">
-                <label for="username" class="text-info">Username:</label><br>
-                <input [(ngModel)]="nombre" type="text" name="username" id="username" class="form-control">
+                <label for="username" class="text-info">email:</label><br>
+                <input formControlName="email" type="text" name="username" id="username" class="form-control">
+                <div class="h-[10px]">
+                  @if (loginForm.controls['email'].errors !== null && loginForm.controls['email'].touched) {
+                  @if (loginForm.controls['email'].errors!['required']) {
+                  <label class="font-light mt-1 text-xs text-red-700" for="email">Campo requerido</label>
+                  }
+                  @if (loginForm.controls['email'].errors!['email']) {
+                  <label class="font-light mt-1 text-xs text-red-700" for="email">Ingrese email valido</label>
+                  }
+                  }
+                </div>
               </div>
               <div class="form-group">
-                <label for="password" class="text-info">Password:</label><br>
-                <input [(ngModel)]="contrasenia" type="text" name="password" id="password" class="form-control">
+                <label for="password" class="text-info">contraseña:</label><br>
+                <input formControlName="password" type="text" name="password" id="password" class="form-control">
+                <div class="h-[10px]">
+                  @if (loginForm.controls['password'].errors !== null && loginForm.controls['password'].touched) {
+                  @if (loginForm.controls['password'].errors!['required']) {
+                  <label class="font-light mt-1 text-xs text-red-700" for="password">Campo requerido</label>
+                  }
+                  @if (loginForm.controls['password'].errors!['minlength']) {
+                  <label class="font-light mt-1 text-xs text-red-700" for="password">Ingrese minimo 6 caracteres</label>
+                  }
+                  }
+                </div>
               </div>
               <div class="form-group">
                 <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me"
                       name="remember-me" type="checkbox"></span></label><br>
                 <button (click)="login()" class="">Ingresar</button>
-                <button (click)="usuarioAdmin()" class="">IngresarAdmin</button>
-                <button (click)="usuarioempleado()" class="">Ingresarempleado</button>
               </div>
               <!-- 
                 <div id="register-link" class="text-right">
                   <a href="#" class="text-info">Register here</a>
                 </div>
               -->
+              <button class="w-100 btn btn-primary btn-lg mt-3" (click)="user()">Usuario 1</button>
+              <button class="w-100 btn btn-primary btn-lg mt-3" (click)="admin()">Admin</button>
             </form>
           </div>
         </div>

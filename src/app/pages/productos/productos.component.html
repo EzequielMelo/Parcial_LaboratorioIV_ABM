@@ -1,59 +1,33 @@
 <main class="container py-4">
-  <header class="pb-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-      <span class="fs-4">Primer Examen</span>
-    </a>
-  </header>
-
-  <div class="p-5 mb-4 bg-light rounded-3">
-    <div class="container-fluid py-5">
-      <h1 class="display-5 fw-bold">Productos</h1>
-      <!-- Enviamos el array de películas al componente hijo -->
+  <div class="p-1 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-2">
+      <h1 class="d-flex justify-content-center fw-bold">Productos</h1>
       <app-tabla-productos [productos]="productos"
         (eventoProducto)="recibirDetalleProducto($event)"></app-tabla-productos>
-      <button class="btn btn-primary btn-lg" type="button">Example button</button>
     </div>
   </div>
 
-  <div class="p-5 mb-4 bg-light rounded-3">
-    <div class="container-fluid py-5">
-      <h1 class="display-5 fw-bold">Detalles de producto seleccionado</h1>
-      <app-detalle-producto [producto]="producto"></app-detalle-producto>
-      <button class="btn btn-primary btn-lg" type="button">Example button</button>
-    </div>
-  </div>
 
-  <div class="p-5 mb-4 bg-light rounded-3">
-    <div class="container-fluid py-5">
-      <h1 class="display-5 fw-bold">Detalles del pais</h1>
-      <app-detalle-pais [pais]="pais">></app-detalle-pais>
-      <button class="btn btn-primary btn-lg" type="button">Example button</button>
-    </div>
-  </div>
-
-  <!-- 
-    <div class="row align-items-md-stretch">
-      <div class="col-md-6">
-        <div class="h-100 p-5 text-white bg-dark rounded-3">
-          <h2>Change the background</h2>
-          <p>Swap the background-color utility and add a <code>.text-*</code> color utility to mix up the jumbotron look.
-            Then, mix and match with additional component themes and more.</p>
-          <button class="btn btn-outline-light" type="button">Example button</button>
+  <div class="row align-items-md-stretch">
+    <div class="col-md-6">
+      <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-header py-3">
+          <h4 class="my-0 fw-normal">Detalles del producto</h4>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="h-100 p-5 bg-light border rounded-3">
-          <h2>Add borders</h2>
-          <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure to
-            look under the hood at the source HTML here as we've adjusted the alignment and sizing of both column's
-            content for equal-height.</p>
-          <button class="btn btn-outline-secondary" type="button">Example button</button>
+        <div class="card-body">
+          <app-detalle-producto [producto]="producto"></app-detalle-producto>
         </div>
       </div>
     </div>
-  -->
-
-  <footer class="pt-3 mt-4 text-muted border-top">
-    &copy; Ezequiel Melo
-  </footer>
+    <div class="col-md-6">
+      <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-header py-3">
+          <h4 class="my-0 fw-normal">Detalles del pais</h4>
+        </div>
+        <div class="card-body">
+          <app-detalle-pais [pais]="pais">></app-detalle-pais>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>

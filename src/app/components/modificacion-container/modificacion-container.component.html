@@ -1,0 +1,54 @@
+<form id="login-form" class="form" [formGroup]="modificarContainerForm">
+  <div class="form-group">
+    <label for="codigo" class="text-info">codigo:</label><br>
+    <input formControlName="codigo" type="text" name="codigo" id="codigo" class="form-control">
+    <div class="h-[10px]">
+      @if (modificarContainerForm.controls['codigo'].errors !== null &&
+      modificarContainerForm.controls['codigo'].touched) {
+      @if (modificarContainerForm.controls['codigo'].errors!['required']) {
+      <label class="font-light mt-1 text-xs text-red-700" for="codigo">Campo requerido</label>
+      }
+      @if (modificarContainerForm.controls['codigo'].errors!['minlength']) {
+      <label class="font-light mt-1 text-xs text-red-700" for="codigo">Ingrese un número de 3 cifras o más</label>
+      }
+      @if (modificarContainerForm.controls['codigo'].errors!['pattern']) {
+      <label class="font-light mt-1 text-xs text-red-700" for="codigo">Solo se permiten números</label>
+      }
+      }
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="empresa" class="text-info">Empresa:</label><br>
+    <input formControlName="empresa" type="text" name="empresa" id="empresa" class="form-control">
+    <div class="h-[10px]">
+      @if (modificarContainerForm.controls['empresa'].errors !== null &&
+      modificarContainerForm.controls['empresa'].touched) {
+      @if (modificarContainerForm.controls['empresa'].errors!['required']) {
+      <label class="font-light mt-1 text-xs text-red-700" for="empresa">Campo requerido</label>
+      }
+      @if (modificarContainerForm.controls['empresa'].errors!['pattern']) {
+      <label class="font-light mt-1 text-xs text-red-700" for="empresa">Solo se permiten letras y espacios</label>
+      }
+      }
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="capacidad" class="text-info">Capacidad:</label><br>
+    <input formControlName="capacidad" type="text" name="capacidad" id="capacidad" class="form-control">
+    <div class="h-[10px]">
+      @if (modificarContainerForm.controls['capacidad'].errors !== null &&
+      modificarContainerForm.controls['capacidad'].touched) {
+      @if (modificarContainerForm.controls['capacidad'].errors!['required']) {
+      <label class="font-light mt-1 text-xs text-red-700" for="capacidad">Campo requerido</label>
+      }
+      @if (modificarContainerForm.controls['capacidad'].errors!['min']) {
+      <label class="font-light mt-1 text-xs text-red-700" for="capacidad">Debe ser mayor que 0</label>
+      }
+      }
+    </div>
+  </div>
+  <div class="form-group mt-4">
+    <button [disabled]="modificarContainerForm.invalid" (click)="modifyContainer()" type="button"
+      class="w-100 btn btn-lg btn-outline-primary">Modificar</button>
+  </div>
+</form>
