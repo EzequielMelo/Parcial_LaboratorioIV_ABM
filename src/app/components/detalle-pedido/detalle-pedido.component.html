@@ -1,0 +1,47 @@
+<!--
+  <div *ngIf="countryDetails">
+    <h2>{{ countryDetails?.name?.common }}</h2>
+    <p><strong>Capital:</strong> {{ countryDetails?.capital?.[0] }}</p>
+    <p><strong>Región:</strong> {{ countryDetails?.region }}</p>
+    <p><strong>Subregión:</strong> {{ countryDetails?.subregion }}</p>
+    <p><strong>Población:</strong> {{ countryDetails?.population | number }}</p>
+    <img [src]="countryDetails?.flags?.png" alt="Bandera de {{ countryDetails?.name?.common }}">
+  </div>
+  
+  <div *ngIf="error">
+    <p>{{ error }}</p>
+  </div>
+
+-->
+
+@if (container) {
+<h2><strong>Container:</strong> {{ container.codigo }}</h2>
+<p><strong>Capacidad:</strong> {{ container.capacidad }}</p>
+<div style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc;">
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr style="position: sticky; top: 0; background-color: #343a40; z-index: 1;">
+        <th scope="col">Código Pedido</th>
+        <th scope="col">Nombre Producto</th>
+        <th scope="col">País del Producto</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of pedidos; track $index) {
+      <tr style="height: auto">
+        <th scope="row">{{ item.id }}</th>
+        <td>{{ item.producto?.descripcion || 'Sin descripción' }}</td>
+        <td>
+          @if (item.countryDetails?.flags?.png) {
+          <img [src]="item.countryDetails.flags.png" alt="Bandera de {{ item.countryDetails.name.common }}"
+            style="width: 50px; height: auto;" />
+          } @else {
+          <span>País no disponible</span>
+          }
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+}

@@ -50,4 +50,12 @@ export const routes: Routes = [
       ),
     canActivate: [authGuard, adminGuard],
   },
+  {
+    path: 'pedidos',
+    loadComponent: () =>
+      import('./pages/pedidos/pedidos.component').then(
+        (c) => c.PedidosComponent
+      ),
+    canActivate: [authGuard, adminGuard],
+  },
 ];

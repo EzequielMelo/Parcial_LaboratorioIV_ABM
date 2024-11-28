@@ -2,30 +2,33 @@
   <div class="p-1 mb-4 bg-light rounded-3">
     <div class="container-fluid py-2">
       <h1 class="d-flex justify-content-center fw-bold">Productos</h1>
-      <app-tabla-productos [productos]="productos"
-        (eventoProducto)="recibirDetalleProducto($event)"></app-tabla-productos>
+      <app-tabla-containers [containers]="containers"
+        (eventoContainer)="recibirDetalleContainer($event)"></app-tabla-containers>
     </div>
   </div>
 
 
   <div class="row align-items-md-stretch">
+    <h1 class="d-flex justify-content-center fw-bold">Pedidos</h1>
     <div class="col-md-6">
       <div class="card mb-4 rounded-3 shadow-sm">
         <div class="card-header py-3">
-          <h4 class="my-0 fw-normal">Detalles del producto</h4>
+          <h4 class="my-0 fw-normal">Alta del pedido</h4>
         </div>
         <div class="card-body">
-          <app-detalle-producto [producto]="producto"></app-detalle-producto>
+          <app-alta-pedido [container]="container"></app-alta-pedido>
+
         </div>
       </div>
     </div>
     <div class="col-md-6">
       <div class="card mb-4 rounded-3 shadow-sm">
         <div class="card-header py-3">
-          <h4 class="my-0 fw-normal">Detalles del pais</h4>
+          <h4 class="my-0 fw-normal">Detalles del Pedido</h4>
         </div>
         <div class="card-body">
-          <app-detalle-pais [pais]="pais"></app-detalle-pais>
+          <app-detalle-pedido [container]="container"></app-detalle-pedido>
+
         </div>
       </div>
     </div>

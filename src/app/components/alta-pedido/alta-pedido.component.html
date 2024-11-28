@@ -1,0 +1,58 @@
+<form id="login-form" class="form" [formGroup]="modificarContainerForm">
+  <div class="form-group">
+    <label for="codigo" class="text-info">codigo:</label><br>
+    <input formControlName="codigo" type="text" name="codigo" id="codigo" class="form-control">
+    <div class="h-[10px]">
+      @if (modificarContainerForm.controls['codigo'].errors !== null &&
+      modificarContainerForm.controls['codigo'].touched) {
+      @if (modificarContainerForm.controls['codigo'].errors!['required']) {
+      <label class="font-light mt-1 text-xs text-red-700" for="codigo">Campo requerido</label>
+      }
+      @if (modificarContainerForm.controls['codigo'].errors!['minlength']) {
+      <label class="font-light mt-1 text-xs text-red-700" for="codigo">Ingrese un número de 3 cifras o más</label>
+      }
+      @if (modificarContainerForm.controls['codigo'].errors!['pattern']) {
+      <label class="font-light mt-1 text-xs text-red-700" for="codigo">Solo se permiten números</label>
+      }
+      }
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="codigoProducto" class="text-info">codigo de producto:</label><br>
+    <input formControlName="codigoProducto" type="text" name="codigoProducto" id="codigoProducto" class="form-control">
+    <div class="h-[10px]">
+      @if (modificarContainerForm.controls['codigoProducto'].errors !== null &&
+      modificarContainerForm.controls['codigoProducto'].touched) {
+      @if (modificarContainerForm.controls['codigoProducto'].errors!['required']) {
+      <label class="font-light mt-1 text-xs text-red-700" for="codigoProducto">Campo requerido</label>
+      }
+      @if (modificarContainerForm.controls['codigoProducto'].errors!['minlength']) {
+      <label class="font-light mt-1 text-xs text-red-700" for="codigoProducto">Ingrese un número de 3 cifras o
+        más</label>
+      }
+      @if (modificarContainerForm.controls['codigoProducto'].errors!['pattern']) {
+      <label class="font-light mt-1 text-xs text-red-700" for="codigoProducto">Solo se permiten números</label>
+      }
+      }
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="cantidadProducto" class="text-info">Cantidad de producto:</label><br>
+    <input formControlName="cantidadProducto" type="text" name="cantidadProducto" id="cantidadProducto"
+      class="form-control">
+    <div class="h-[10px]">
+      @if (modificarContainerForm.controls['cantidadProducto'].errors !== null &&
+      modificarContainerForm.controls['cantidadProducto'].touched) {
+      @if (modificarContainerForm.controls['cantidadProducto'].errors!['required']) {
+      <label class="font-light mt-1 text-xs text-red-700" for="cantidadProducto">Campo requerido</label>
+      }
+      @if (modificarContainerForm.controls['cantidadProducto'].errors!['pattern']) {
+      <label class="font-light mt-1 text-xs text-red-700" for="cantidadProducto">Solo se permiten números</label>
+      }
+      }
+    </div>
+  </div>
+  <div class="form-group mt-4">
+    <button (click)="createPedido()" type="button" class="w-100 btn btn-lg btn-outline-primary">Modificar</button>
+  </div>
+</form>

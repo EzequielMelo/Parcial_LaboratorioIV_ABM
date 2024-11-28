@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { doc, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
-import { from, map, Observable } from 'rxjs';
+import { firstValueFrom, from, map, Observable, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +27,32 @@ export class DatabaseService {
     return productos.valueChanges();
   }
 
+  existsProductoByCodigo(
+    codigo: string,
+    callback: (existe: boolean) => void
+  ): void {
+    this.firestore
+      .collection('productos', (ref) => ref.where('codigo', '==', codigo))
+      .get()
+      .subscribe((querySnapshot) => {
+        callback(!querySnapshot.empty);
+      });
+  }
+
+  getCantidadProducto(codigo: string, callback: (stock: number) => void): void {
+    this.firestore
+      .collection('productos', (ref) => ref.where('codigo', '==', codigo))
+      .get()
+      .subscribe((querySnapshot) => {
+        if (!querySnapshot.empty) {
+          const producto = querySnapshot.docs[0].data() as { stock: number };
+          callback(producto.stock || 0);
+        } else {
+          callback(0);
+        }
+      });
+  }
+
   addContainer(container: any) {
     const containersColl = this.firestore.collection('containers');
     return containersColl.add(container);
@@ -39,9 +65,72 @@ export class DatabaseService {
         actions.map((a) => {
           const data = a.payload.doc.data() as any;
           const id = a.payload.doc.id;
-          return { id, ...data }; // Incluye el ID en el objeto
+          return { id, ...data };
         })
       )
+    );
+  }
+
+  updateContainerCapacity(containerId: string, nuevaCapacidad: number) {
+    const containerRef = this.firestore
+      .collection('containers')
+      .doc(containerId);
+    return containerRef
+      .update({ capacidad: nuevaCapacidad })
+      .then(() => {
+        console.log('Capacidad del contenedor actualizada correctamente.');
+      })
+      .catch((error) => {
+        console.error(
+          'Error al actualizar la capacidad del contenedor:',
+          error
+        );
+      });
+  }
+
+  addPedido(pedido: any) {
+    const containersColl = this.firestore.collection('pedido');
+    return containersColl.add(pedido);
+  }
+
+  getPedidosByContainerId(containerId: string) {
+    const pedidosColl = this.firestore.collection('pedido', (ref) =>
+      ref.where('containerId', '==', containerId)
+    );
+
+    return pedidosColl.get().pipe(
+      map((querySnapshot) => {
+        return querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...(doc.data() as any), // Casting a `any` para manejar datos dinámicos
+        }));
+      }),
+      switchMap((pedidos) => {
+        const pedidosConProducto = pedidos.map(async (pedido) => {
+          const productoSnapshot = await this.firestore
+            .collection('productos', (ref) =>
+              ref.where('codigo', '==', pedido.codigoProducto)
+            )
+            .get()
+            .toPromise();
+
+          // Asegúrate de manejar el caso donde `productoSnapshot` sea undefined o no tenga datos
+          if (!productoSnapshot || productoSnapshot.empty) {
+            return {
+              ...pedido,
+              producto: null, // Si no hay producto, lo asignamos como null
+            };
+          }
+
+          const producto = productoSnapshot.docs[0].data(); // Toma el primer documento coincidente
+          return {
+            ...pedido,
+            producto,
+          };
+        });
+
+        return Promise.all(pedidosConProducto); // Resuelve todas las Promises
+      })
     );
   }
 
